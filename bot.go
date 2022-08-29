@@ -168,8 +168,8 @@ var (
 
 func init() {
 	// 默认昵称
-	adana = flag.String("n", "椛椛", "Set default nickname.")
-	prefix = flag.String("p", "/", "Set command prefix.")
+	adana = flag.String("n", "爱酱", "Set default nickname.")
+	prefix = flag.String(".", "", "Set command prefix.")
 	gocq.InitBase()
 
 	arg := flag.Args()
@@ -185,7 +185,7 @@ func init() {
 
 	_ = driver.NewFuncallClient("zbp", newcaller, func(f *driver.FCClient) {
 		// 帮助
-		zero.OnFullMatchGroup([]string{"/help", ".help", "菜单"}, zero.OnlyToMe).SetBlock(true).FirstPriority().
+		zero.OnFullMatchGroup([]string{"help", ".help", "菜单"}, zero.OnlyToMe).SetBlock(true).FirstPriority().
 			Handle(func(ctx *zero.Ctx) {
 				ctx.SendChain(message.Text(kanban.Banner))
 			})
@@ -198,7 +198,7 @@ func init() {
 				NickName:      append([]string{*adana}, nicks...),
 				CommandPrefix: *prefix,
 				// SuperUsers 某些功能需要主人权限，可通过以下两种方式修改
-				// SuperUsers: []int64{12345678, 87654321}, // 通过代码写死的方式添加主人账号
+				 SuperUsers: []int64{1977325774}, // 通过代码写死的方式添加主人账号
 				SuperUsers: qqs, // 通过命令行参数的方式添加主人账号
 				Driver:     []zero.Driver{f},
 			},
